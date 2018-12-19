@@ -1,0 +1,36 @@
+/* @import '~antd/dist/antd.css'; */
+.App {
+  text-align: center;
+}
+
+.App_logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App_header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App_title {
+  font-size: 1.5em;
+}
+
+.App_intro {
+  font-size: large;
+}
+.gutter-example .ant-row > div {
+  background: transparent;
+  border: 0;
+}
+.gutter-box {
+  background: #00A0E9;
+  padding: 5px 0;
+}
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

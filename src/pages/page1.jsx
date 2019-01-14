@@ -29,12 +29,15 @@ class PageOne extends Component {
 	clickfn(x){
 		console.log(x)
 	}
+	componentWillReceiveProps(nextProps){
+		console.log(nextProps)
+	}
 	render(){
 		return (
 				<div className={style.App} style={this.state.stateStyle}>
 					<input ref='input' value={this.state.value} onFocus={this.focus} onChange={ (event)=> this.change(event)}/>
 					<span  onClick={this.clickSpan}>{this.state.value}</span>
-					<span onClick={this.clickfn.bind(this,'中国世界')} >行间绑定this</span>
+					<span onClick={this.clickfn.bind(this,'中国世界')} >行间绑定this {this.props.propsText} </span>
 				</div>
 			)
 	}

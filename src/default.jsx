@@ -9,7 +9,8 @@ import Register from './pages/register'
 import Msg from './pages/message'
 // import Star from './asset/images/beiz.svg'
 import RouterOne from "./pages/routerone"
-import { Radio,Input,Button,Row, Col,Select ,DatePicker,Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Radio,Input,Button,Row, Col,Select ,DatePicker,Layout, Menu, Breadcrumb, Icon ,Tabs,Popover} from 'antd';
+const TabPane = Tabs.TabPane;
 class Default extends Component {
   constructor(props) {
         super(props);
@@ -20,10 +21,13 @@ class Default extends Component {
             login:true,
             arr1:[1,2,3],
             com:<PageThree />,
+            visible: false,
             bol:null,
-            arr:[{key:'1'},{key:'2'},{key:'3'},{key:'4'}]
+            ds:'1',
+            arr:[{key:'1'},{key:'2'},{key:'3'},{key:'4'}],
+            // testprops :'text123'
         };
-        
+        this.testprops = 'text123'
         // ES6 类中函数必须手动绑定
         // this.handleClick = this.handleClick.bind(this);
     }
@@ -74,13 +78,55 @@ class Default extends Component {
       bol:''
     })
   }
-  changeColor=()=>{
-    const url = window.cssUrl.link1
-     for(var i = 0;i< document.getElementsByTagName('link').length;i++){
-      if(document.getElementsByTagName('link')[i].getAttribute('href').includes('commonColor')){
-        document.getElementsByTagName('link')[i].setAttribute('href',url)
-      }
-     }  
+  // changeColor=()=>{
+  //   const url = window.cssUrl.link1
+  //    for(var i = 0;i< document.getElementsByTagName('link').length;i++){
+  //     if(document.getElementsByTagName('link')[i].getAttribute('href').includes('commonColor')){
+  //       document.getElementsByTagName('link')[i].setAttribute('href',url)
+  //     }
+  //    }  
+  // }
+  changeProps=()=>{
+    this.setState({ds :"dfdffd"})
+    this.testprops  = "dfdssssffd"
+  }
+  gengerator=()=>{
+   const p1 = new Promise(function(res,rej){
+        setTimeout(function(){
+          rej(new Error("p1error"))
+          // res('p1success')
+        },2000)
+   }).catch(err=>console.log(err))
+   const p2 = new Promise(function(res,rej){
+    setTimeout(function(){
+      res(p1)
+    },1000)
+    })
+   p2
+   .then((respone)=>console.log(respone))
+   .catch(err=>console.log(err))
+
+  //   const p3 = new Promise(function(res,rej){
+  //     setTimeout(function(){
+  //       res("p3")
+  //     },3000)
+  //   })
+  //   Promise.all([p1,p2,p3]).then(([x,y,z])=>{
+  //     console.log(x,y,z)
+  //   })
+  // const fn = function*(){
+  //   let y;
+  //    console.log(y=(yield 1)) ;
+  // }
+  // const gen = fn()
+  // console.log(gen.next())
+  // setTimeout(() => {
+  //   // console.log(gen.next())
+  //   gen.next()    
+  // }, 3000);
+  }
+  handleVisibleChange = (visible) => {
+    this.setState({ visible:true });
   }
   render() {
     const { SubMenu } = Menu;
@@ -94,10 +140,38 @@ const { Header, Content, Sider } = Layout
     }
     return (
       <div>
+ <Button onClick={this}>Click test</Button>
+
+         <Popover
+        content={<a onClick={this.hide}>Close</a>}
+        title="Title"
+        // trigger="click"
+        visible={this.state.visible}
+        // onVisibleChange={this.handleVisibleChange}
+      >
+        <Button onClick={this.handleVisibleChange}>Click me</Button>
+      </Popover>
+        <div onClick={this.gengerator}>
+        gengertorButton
+        </div>
+        <Tabs style={{position:'static'}}  defaultActiveKey="1" >
+    <TabPane tab="Tab 1" key="1">   {/* <Icon component={Star} /> */}
+        <Select defaultValue="lucy" getPopupContainer={triggerNode => triggerNode.parentNode}>
+          <Select.Option value="jack">Jack</Select.Option>
+          <Select.Option value="lucy">Lucy</Select.Option>
+          <Select.Option value="disabled" disabled>Disabled</Select.Option>
+          <Select.Option value="Yiminghe">yiminghe</Select.Option>
+        </Select></TabPane>
+    <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
+    <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
+  </Tabs>
           	<div className="repair_room" style={{width:200,height:200}}>
 					</div>
           <div onClick={this.changeColor}>
             changgeColor
+          </div>
+          <div onClick={this.changeProps}>
+            点击
           </div>
           {/* <Icon component={Star} /> */}
         <Select defaultValue="lucy" getPopupContainer={triggerNode => triggerNode}>
@@ -137,7 +211,8 @@ const { Header, Content, Sider } = Layout
         </p>
         <em>{this.state.text}</em>
         <em>{this.props.open}</em>
-        <PageOne/>
+        {/* ddd={this.state.ds} */}
+        <PageOne  propsText = {this.testprops} />
         <PageTwo propsClick={this.appPropsClick} />
         <PageTwo propsClick={this.appPropsClick} />
         <PageTwo propsClick={this.appPropsClick} />

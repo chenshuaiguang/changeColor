@@ -15,7 +15,7 @@ class AntdForm extends Component {
 	}	
 	componentDidMount(){
 		function* gener(x){
-			var y = '1'+ (yield x + 2);
+			var y = '1'+ (yield x + 2)
 			console.log(y)
 			return y
 		}

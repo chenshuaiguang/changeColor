@@ -17,7 +17,7 @@ class AntdForm extends Component {
 		function* gener(x){
 			var y = '1'+ (yield x + 2);
 			console.log(y)
-			return y;
+			return y
 		}
 		const generator = gener(1)
 		console.log( generator.next())
